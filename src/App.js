@@ -138,7 +138,14 @@ class App extends Component {
 					}}
 				/>
 				<Route path='/about' component={About} />
-				<Route path='/viewall' component={ViewAll} handleRead={this.handleRead} />
+				<Route path='/viewall' render={(routerprops) => {
+					return (
+						<ViewAll
+							handleRead={this.handleRead}
+						/>
+					)
+				}} />
+				{/* <Route path='/viewall' component={ViewAll} handleRead={this.handleRead} /> */}
 				<Route path='/add' component={Add} />
 				{/* <Route path='/search' component={Search} /> */}
 			</div>
