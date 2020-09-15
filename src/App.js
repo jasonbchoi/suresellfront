@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect,withRouter } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login';
 import About from './components/About';
@@ -129,4 +129,4 @@ class App extends Component {
 	}
 }
 
-export default App;
+export default withRouter(App);

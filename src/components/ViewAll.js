@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import HeadNav from './HeadNav';
 import BaseNav from './BaseNav';
 import { render } from 'react-dom';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 // import SwipeToDelete from 'react-swipe-to-delete-component';
 
 import { Form, Button, Col } from 'react-bootstrap';
@@ -16,7 +16,7 @@ class ViewAll extends Component {
 			car: null,
 			allCars: null,
 			token: localStorage.getItem('token') ? true : false,
-			
+
 		};
 	}
 
@@ -71,10 +71,10 @@ class ViewAll extends Component {
 			},
 		}).then(() => {
 			fetch(url)
-			.then((res) => res.json())
-			.then((res) => {
-				this.setState({ features: [...res] });
-			})
+				.then((res) => res.json())
+				.then((res) => {
+					this.setState({ features: [...res] });
+				})
 		})
 	};
 
@@ -101,7 +101,13 @@ class ViewAll extends Component {
 				return res.json()
 			})
 			.then((res) => {
-				console.log(res);
+				fetch('https://suresell.herokuapp.com/cars/')
+					.then((res) => {
+						return res.json()
+					})
+					.then((res) => {
+						this.setState({ data: res })
+					})
 			}).catch(error => console.error(error))
 	}
 
@@ -149,8 +155,8 @@ class ViewAll extends Component {
 		// if (this.handleDelete === undefined) {
 		// 	return null;
 		// }else{
-	const handleDelete = this.handleDelete
-		
+		const handleDelete = this.handleDelete
+
 		return (
 			<div className='ViewAll'>
 				<HeadNav />
@@ -181,7 +187,7 @@ class ViewAll extends Component {
 					{console.log(this)}
 					{this.state.features.map(function (car, index) {
 						return (
-							//
+
 							<div id='autoCard' key={car.id}>
 								{console.log(this)}
 								{/* <SwipeToDelete key={car.id} car={car}> */}
@@ -212,7 +218,7 @@ class ViewAll extends Component {
 											<li>E</li>
 											<Link
 												to={{
-													pathname: "/edit/"+car.id,
+													pathname: "/edit/" + car.id,
 													data: car
 												}}
 											> Edit</Link>
@@ -227,7 +233,7 @@ class ViewAll extends Component {
 											<button
 												name='handleDelete'
 												className='deleteButton'
-												onClick={(e)=> {handleDelete(e, car.id)}}>
+												onClick={(e) => { handleDelete(e, car.id) }}>
 												Delete
 											</button>
 										</ul>
@@ -241,8 +247,8 @@ class ViewAll extends Component {
 				<BaseNav />
 			</div>
 		);
-		}
 	}
+}
 // }
 
 export default ViewAll;

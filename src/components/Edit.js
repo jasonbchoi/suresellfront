@@ -74,7 +74,7 @@ class Edit extends Component {
         });
 
     handleSubmit = (event) => {
-        // event.preventDefault();
+        event.preventDefault();
         console.log(event.target);
         const data = {
             method: "PATCH",
@@ -98,6 +98,7 @@ class Edit extends Component {
             .then((res) => {
                 console.log(res);
             }).catch(error => console.error(error))
+        this.props.history.push('/viewall')
     }
 
 
