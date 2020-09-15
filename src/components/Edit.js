@@ -32,17 +32,17 @@ class Edit extends Component {
         console.log(data.year)
         if (data) {
             this.setState({
-        id: data.id,
-            year: data.year,
-            make: data.make,
-            model: data.model,
-            trim: data.trim
+                id: data.id,
+                year: data.year,
+                make: data.make,
+                model: data.model,
+                trim: data.trim
             })
 
 
         }
 
-        
+
     }
     // addFeature = (event) => {
     //     event.preventDefault();
@@ -98,20 +98,20 @@ class Edit extends Component {
             .then((res) => {
                 console.log(res);
             }).catch(error => console.error(error))
-        this.props.history.push('https://suresellfrontend.herokuapp.com/viewall')
+        this.props.history.push('/viewall')
     }
 
 
     render() {
-        
+
         return (
             <div>
                 {console.log(this)}
                 <HeadNav />
 
                 <Form className="AddField">
-                    
-                  <br/>
+
+                    <br />
           Vehicle Specs
           <Row>
                         <Col>
