@@ -44,20 +44,10 @@ class ViewAll extends Component {
 	};
 
 	componentDidMount() {
-		let url = `https://suresell.herokuapp.com/cars/`;
-		if (this.state.token) {
-			fetch(url, {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			})
-				.then((res) => res.json())
-				.then((res) => {
-					this.setState({ features: [...res] });
-				});
-		}
+		this.props.handleRead()
 	}
+
+	
 
 	handleDelete = (event, id) => {
 		event.preventDefault()

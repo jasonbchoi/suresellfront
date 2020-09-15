@@ -96,7 +96,9 @@ class Edit extends Component {
                 return res.json()
             })
             .then((res) => {
-                console.log(res);
+                
+                    this.props.handleRead()
+                
             }).catch(error => console.error(error))
         this.props.history.push('/viewall')
     }

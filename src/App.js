@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect,withRouter } from 'react-router-dom';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login';
 import About from './components/About';
@@ -67,7 +67,7 @@ class App extends Component {
 				}
 			});
 	};
-	
+
 
 	handleLogout = () => {
 		localStorage.removeItem('token');
@@ -79,6 +79,21 @@ class App extends Component {
 			login: false,
 		});
 	};
+	handleRead = () => {
+		let url = `https://suresell.herokuapp.com/cars/`;
+		if (this.state.token) {
+			fetch(url, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			})
+				.then((res) => res.json())
+				.then((res) => {
+					this.setState({ features: [...res] });
+				});
+		}
+	}
 
 	handleChangeEmail = (event) =>
 		this.setState({
@@ -102,8 +117,10 @@ class App extends Component {
 			<div className='App'>
 				{this.renderRedirect()}
 				<Route
-				path='/edit/:id'
-				component={Edit}/>
+					path='/edit/:id'
+					component={Edit}
+					handleRead={this.handleRead}
+				/>
 				{/* <Edit/> */}
 				<Route
 					path='/'
@@ -121,7 +138,7 @@ class App extends Component {
 					}}
 				/>
 				<Route path='/about' component={About} />
-				<Route path='/viewall' component={ViewAll} />
+				<Route path='/viewall' component={ViewAll} handleRead={this.handleRead} />
 				<Route path='/add' component={Add} />
 				{/* <Route path='/search' component={Search} /> */}
 			</div>
