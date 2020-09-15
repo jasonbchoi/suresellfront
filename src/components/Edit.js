@@ -98,7 +98,7 @@ class Edit extends Component {
             .then((res) => {
                 console.log(res);
             }).catch(error => console.error(error))
-        this.props.history.push('/viewall')
+        this.props.history.push('https://suresellfrontend.herokuapp.com/viewall')
     }
 
 
