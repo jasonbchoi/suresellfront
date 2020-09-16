@@ -17,6 +17,7 @@ class App extends Component {
 			password: '',
 			login: false,
 			error: false,
+			features: [],
 		};
 	}
 
@@ -25,6 +26,7 @@ class App extends Component {
 			return <Redirect to='/viewall' />;
 		}
 	};
+
 	//needs token to be passed as header for each request
 	handleLogin = (event) => {
 		event.preventDefault();
@@ -51,7 +53,7 @@ class App extends Component {
 			})
 			.then((res) => {
 				this.setState({
-					token: this.state.token,
+					token: localStorage.token,
 
 					username: this.state.username,
 					password: this.state.password,
@@ -90,7 +92,7 @@ class App extends Component {
 			})
 				.then((res) => res.json())
 				.then((res) => {
-					this.setState({ features: [...res] });
+					this.setState({features: res } );
 				});
 		}
 	}
@@ -116,12 +118,14 @@ class App extends Component {
 		return (
 			<div className='App'>
 				{this.renderRedirect()}
+
 				<Route
 					path='/edit/:id'
 					component={Edit}
 					handleRead={this.handleRead}
 				/>
 				{/* <Edit/> */}
+
 				<Route
 					path='/'
 					exact
@@ -137,16 +141,20 @@ class App extends Component {
 						);
 					}}
 				/>
-				<Route path='/about' component={About} />
-				<Route path='/viewall' render={(routerprops) => {
-					return (
-						<ViewAll
-							handleRead={this.handleRead}
-						/>
-					)
-				}} />
+
+
+				<Route
+					path='/viewall'
+					render={(routerprops) => {
+						return (
+							<ViewAll handleRead={this.handleRead} />
+						)
+					}} />
 				{/* <Route path='/viewall' component={ViewAll} handleRead={this.handleRead} /> */}
+
+
 				<Route path='/add' component={Add} />
+				<Route path='/about' component={About} />
 				{/* <Route path='/search' component={Search} /> */}
 			</div>
 		);

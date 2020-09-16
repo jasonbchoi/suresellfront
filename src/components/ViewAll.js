@@ -150,6 +150,7 @@ class ViewAll extends Component {
 		return (
 			<div className='ViewAll'>
 				<HeadNav />
+				
 				<div className='searchWrapper'>
 					<Form className='ViewAllSearch' onSubmit={this.handleSubmit}>
 						<Form.Row className='align-items-center'>
@@ -226,6 +227,7 @@ class ViewAll extends Component {
 												onClick={(e) => { handleDelete(e, car.id) }}>
 												Delete
 											</button>
+											
 										</ul>
 									</div>
 								</div>

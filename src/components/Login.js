@@ -6,7 +6,7 @@ function Login(props) {
 		<div className='bg-img'>
 			<div className='Login'>
 				<Form className='LoginForm' onSubmit={props.handleLogin}>
-					
+
 					<Form.Group controlId='username'>
 						<Form.Label>Username</Form.Label>
 						<Form.Control
@@ -25,9 +25,13 @@ function Login(props) {
 						/>
 					</Form.Group>
 
-					<Button id='LoginButton' variant='primary'  type='submit'>
+					<Button
+						id='LoginButton'
+						variant='primary'
+						type='submit'>
 						Login
 					</Button>
+
 					<Button
 						onClick={props.handleLogout}
 						id='LogoutButton'
@@ -35,6 +39,7 @@ function Login(props) {
 						type='button'>
 						Logout
 					</Button>
+
 				</Form>
 			</div>
 		</div>
