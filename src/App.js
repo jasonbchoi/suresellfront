@@ -121,8 +121,12 @@ class App extends Component {
 
 				<Route
 					path='/edit/:id'
-					component={Edit}
-					handleRead={this.handleRead}
+					exact
+					render={(routerprops) => {
+						return (
+							<Edit features={this.state.features} match={routerprops.match} handleRead={this.handleRead}/>)}}
+					
+					
 				/>
 				{/* <Edit/> */}
 
@@ -147,7 +151,7 @@ class App extends Component {
 					path='/viewall'
 					render={(routerprops) => {
 						return (
-							<ViewAll handleRead={this.handleRead} />
+							<ViewAll handleRead={this.handleRead} features={this.state.features}/>
 						)
 					}} />
 				{/* <Route path='/viewall' component={ViewAll} handleRead={this.handleRead} /> */}

@@ -3,6 +3,7 @@ import HeadNav from './HeadNav';
 import BaseNav from './BaseNav';
 import { render } from 'react-dom';
 import { Link } from 'react-router-dom'
+
 // import SwipeToDelete from 'react-swipe-to-delete-component';
 
 import { Form, Button, Col } from 'react-bootstrap';
@@ -45,6 +46,7 @@ class ViewAll extends Component {
 
 	componentDidMount() {
 		this.props.handleRead()
+		// this.setState({features:this.props.features})
 	}
 
 	
@@ -63,7 +65,8 @@ class ViewAll extends Component {
 			fetch(url)
 				.then((res) => res.json())
 				.then((res) => {
-					this.setState({ features: [...res] });
+					// this.setState({ features: [...res] });
+					this.props.handleRead()
 				})
 		})
 	};
@@ -176,7 +179,7 @@ class ViewAll extends Component {
 
 				<div className='cardContainer'>
 					{console.log(this)}
-					{this.state.features.map(function (car, index) {
+					{this.props.features.map(function (car, index) {
 						return (
 
 							<div id='autoCard' key={car.id}>
@@ -227,7 +230,7 @@ class ViewAll extends Component {
 												onClick={(e) => { handleDelete(e, car.id) }}>
 												Delete
 											</button>
-											
+
 										</ul>
 									</div>
 								</div>

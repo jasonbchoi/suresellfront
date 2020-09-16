@@ -3,8 +3,7 @@ import HeadNav from "./HeadNav";
 import BaseNav from "./BaseNav";
 //import FeatureList from './FeatureList'
 import { Form, Row, Col, Button } from "react-bootstrap";
-
-
+import {Redirect} from 'react-router-dom'
 
 class Edit extends Component {
     constructor(props) {
@@ -17,6 +16,8 @@ class Edit extends Component {
             trim: "",
             feature: '',
             features: [],
+            data: {},
+            redirect:false,
         };
     }
 
@@ -27,20 +28,35 @@ class Edit extends Component {
         this.setState({
             feature: event.target.value,
         });
+
     componentDidMount() {
-        const { data } = this.props.location
-        console.log(data.year)
-        if (data) {
-            this.setState({
-                id: data.id,
-                year: data.year,
-                make: data.make,
-                model: data.model,
-                trim: data.trim
-            })
+        console.log(this.props.features);
+        // const { data } = this.props.location
+        // if (this.props.features) {
+        let tempdata = this.props.features.find((feature) => {
+            return feature.id === 5
+        })
+        this.setState({
+            id: tempdata.id,
+            year: tempdata.year,
+            make: tempdata.make,
+            model: tempdata.model,
+            trim: tempdata.trim
+            // console.log(data);
+        })
+        // }
+
+        // if (this.state.data) {
+        // this.setState({
+        //     id: this.state.data.id,
+        //     year: this.state.data.year,
+        //     make: this.state.data.make,
+        //     model: this.state.data.model,
+        //     trim: this.state.data.trim
+        // })
 
 
-        }
+        // }
 
 
     }
@@ -96,16 +112,18 @@ class Edit extends Component {
                 return res.json()
             })
             .then((res) => {
-                
-                    this.props.handleRead()
-                
+
+                this.props.handleRead()
+                this.setState({redirect:true})
             }).catch(error => console.error(error))
-        this.props.history.push('/viewall')
+        // this.props.history.push('/viewall')
     }
 
 
     render() {
-
+        if(this.state.redirect){
+            return <Redirect to='/viewall'/>
+        }
         return (
             <div>
                 {console.log(this)}
