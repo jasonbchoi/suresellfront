@@ -31,10 +31,9 @@ class Edit extends Component {
 
     componentDidMount() {
         console.log(this.props.features);
-        // const { data } = this.props.location
-        // if (this.props.features) {
+       
         let tempdata = this.props.features.find((feature) => {
-            return feature.id === 5
+            return feature.id == this.props.match.params.id
         })
         this.setState({
             id: tempdata.id,
@@ -42,35 +41,10 @@ class Edit extends Component {
             make: tempdata.make,
             model: tempdata.model,
             trim: tempdata.trim
-            // console.log(data);
         })
-        // }
-
-        // if (this.state.data) {
-        // this.setState({
-        //     id: this.state.data.id,
-        //     year: this.state.data.year,
-        //     make: this.state.data.make,
-        //     model: this.state.data.model,
-        //     trim: this.state.data.trim
-        // })
-
-
-        // }
-
 
     }
-    // addFeature = (event) => {
-    //     event.preventDefault();
-    //     this.setState(prevState => {
-    //         return {
-    //             features: [...prevState.features, this.state.feature]
-    //         }
-    //     })
-    //     console.log(this.state.features);
-
-    //     this.clearForm()
-    // };
+    
 
     handleChangeYear = (event) =>
         this.setState({

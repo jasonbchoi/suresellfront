@@ -92,7 +92,7 @@ class App extends Component {
 			})
 				.then((res) => res.json())
 				.then((res) => {
-					this.setState({features: res } );
+					this.setState({ features: res });
 				});
 		}
 	}
@@ -124,9 +124,10 @@ class App extends Component {
 					exact
 					render={(routerprops) => {
 						return (
-							<Edit features={this.state.features} match={routerprops.match} handleRead={this.handleRead}/>)}}
-					
-					
+							<Edit features={this.state.features} match={routerprops.match} handleRead={this.handleRead} />)
+					}}
+
+
 				/>
 				{/* <Edit/> */}
 
@@ -151,13 +152,23 @@ class App extends Component {
 					path='/viewall'
 					render={(routerprops) => {
 						return (
-							<ViewAll handleRead={this.handleRead} features={this.state.features}/>
+							<ViewAll handleRead={this.handleRead} features={this.state.features} />
 						)
 					}} />
 				{/* <Route path='/viewall' component={ViewAll} handleRead={this.handleRead} /> */}
 
 
-				<Route path='/add' component={Add} />
+				<Route path='/add'
+					render={(routerprops) => {
+						return (
+							<Add handleRead={this.handleRead}
+								features={this.state.features} />
+						)
+					}}
+				/>
+
+
+
 				<Route path='/about' component={About} />
 				{/* <Route path='/search' component={Search} /> */}
 			</div>

@@ -3,6 +3,7 @@ import HeadNav from "./HeadNav";
 import BaseNav from "./BaseNav";
 //import FeatureList from './FeatureList'
 import { Form, Row, Col, Button } from "react-bootstrap";
+import { Redirect, Link } from 'react-router-dom'
 
 class Add extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class Add extends Component {
       trim: "",
       feature: '',
       features: [],
+      redirect: false,
     };
   }
   clearForm = () => {
@@ -37,20 +39,19 @@ class Add extends Component {
 
 
   handleSubmit = (event) => {
-    // event.preventDefault();
+    event.preventDefault();
     console.log(event.target);
     const data = {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
-        Authorization : 'Bearer ' + localStorage.getItem('token')
+        Authorization: 'Bearer ' + localStorage.getItem('token')
       },
       body: JSON.stringify({
         year: this.state.year,
         make: this.state.make,
         model: this.state.year,
         trim: this.state.trim,
-        // features: this.state.features,
       })
     };
     fetch(
@@ -59,8 +60,11 @@ class Add extends Component {
         return res.json()
       })
       .then((res) => {
-        console.log(res);
+        this.props.handleRead()
+        this.setState({ redirect: true })
       }).catch(error => console.error(error))
+    this.props.history.push('/viewall')
+
   }
 
 
@@ -85,11 +89,17 @@ class Add extends Component {
     });
 
   render() {
+    // if(this.state.redirect){
+    //   return <Redirect to={{pathname:'/viewall', state:{
+    //     features:this.props.features,
+    //     token: localStorage.token
+    //   }}}/>
+    // }
     return (
       <div className="Add">
         <HeadNav />
 
-        <Form className="AddField">
+        <Form className="AddField" onSubmit={this.handleSubmit.bind(this)}>
           Add a Car
           <br />
           <br />
@@ -167,18 +177,20 @@ class Add extends Component {
           </Form>
         </div>
 
-
+        {/* <Link to='/viewall'> */}
         <Button
           type="submit"
           className="AddCard"
-          onClick={this.handleSubmit}
+          // onClick={this.handleSubmit}
           variant="primary"
           size="lg"
           block
-          href='/viewall'
+        // href='/viewall'
         >
           Make Card
         </Button>
+        {/* </Link> */}
+
 
         <BaseNav />
       </div>
